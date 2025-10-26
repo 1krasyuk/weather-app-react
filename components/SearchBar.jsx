@@ -4,11 +4,11 @@ export default function SearchBar() {
   return (
     <div className="space-y-3">
       <div className="relative ">
-        <SearchIcon className="absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-200" />
+        <SearchIcon className="absolute left-6 top-1/2 transform -translate-y-1/2 w-5.5 h-5.5 text-neutral-200" />
         <input
           className="
-      w-full pl-13 py-2.5 
-      bg-neutral-800 text-neutral-0 font-medium text-lg
+      w-full pl-15 py-3 
+      bg-neutral-800 text-neutral-0 font-normal text-xl
       rounded-xl 
       border-2 border-transparent
       focus:border-neutral-0 focus:outline-none
@@ -17,7 +17,7 @@ export default function SearchBar() {
           placeholder="Search for a place..."
         />
       </div>
-      <button className="bg-blue-500 w-full rounded-lg py-2.5 text-lg">
+      <button className="bg-blue-500 w-full rounded-xl py-3.5 text-xl">
         Search
       </button>
     </div>

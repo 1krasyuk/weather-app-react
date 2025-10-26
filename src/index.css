@@ -29,7 +29,6 @@
 @layer base {
   html {
     font-family: "DM Sans", sans-serif;
-    font-size: 18px;
     background-color: hsl(243, 96%, 9%);
     color: hsl(0, 0%, 100%);
   }
