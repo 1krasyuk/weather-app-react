@@ -8,8 +8,10 @@ import WeatherCard from "../components/WeatherCard";
 import MetricsCard from "../components/MetricsCard";
 import DailyForecastCard from "../components/DailyForecastCard";
 import HourlyForecastList from "../components/HourlyForecastList";
+import MetricsList from "../components/MetricsList";
 
 import IconSunny from "../src/assets/images/icon-sunny.webp";
+import DailyForecastList from "../components/DailyForecastList";
 
 function App() {
   const [weather, setWeather] = useState({});
@@ -30,7 +32,7 @@ function App() {
         if (!location)
           throw new Error("City not found, check if your input is right");
 
-        const { latitude, longitude } = location;
+        const { name: city, country, latitude, longitude } = location;
 
         const meteoRes = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=temperature_2m,weather_code&current=temperature_2m,precipitation,wind_speed_10m,apparent_temperature,relative_humidity_2m,weather_code&timezone=auto`
@@ -40,9 +42,8 @@ function App() {
 
         const meteoData = await meteoRes.json();
 
-        console.log(meteoData);
-
-        setWeather(meteoData);
+        setWeather({ city, country, ...meteoData });
+        console.log("✅ MeteoData:", meteoData);
       } catch (err) {
         console.error(err);
       } finally {
@@ -60,58 +61,14 @@ function App() {
         How's the sky looking today?
       </h1>
       <SearchBar />
-      <WeatherCard />
-      <div className="grid grid-cols-2 gap-4 my-5">
-        <MetricsCard title="Feels Like" value="" unit="" />
-        <MetricsCard title="Humidity" value="46" unit="%" />
-        <MetricsCard title="Wind" value="9" unit="mph" />
-        <MetricsCard title="Precipitation" value="0" unit="in" />
-      </div>
+      <WeatherCard
+        currentData={weather.current}
+        city={weather.city}
+        country={weather.country}
+      />
+      <MetricsList currentData={weather.current} />
       <h2 className="text-xl mt-8 font-medium tracking-wide">Daily forecast</h2>
-      <div className="grid grid-cols-3 gap-4 my-5">
-        <DailyForecastCard
-          day="Tue"
-          icon={<img src={IconSunny} alt="Sunny" className="w-15 h-15" />}
-          maxTemp="68"
-          minTemp="57"
-        />
-        <DailyForecastCard
-          day="Wed"
-          icon={<img src={IconSunny} alt="Sunny" className="w-15 h-15" />}
-          maxTemp="70"
-          minTemp="59"
-        />
-        <DailyForecastCard
-          day="Thu"
-          icon={<img src={IconSunny} alt="Sunny" className="w-15 h-15" />}
-          maxTemp="60"
-          minTemp="55"
-        />
-        <DailyForecastCard
-          day="Fri"
-          icon={<img src={IconSunny} alt="Sunny" className="w-15 h-15" />}
-          maxTemp="75"
-          minTemp="57"
-        />
-        <DailyForecastCard
-          day="Sat"
-          icon={<img src={IconSunny} alt="Sunny" className="w-15 h-15" />}
-          maxTemp="70"
-          minTemp="59"
-        />
-        <DailyForecastCard
-          day="Sun"
-          icon={<img src={IconSunny} alt="Sunny" className="w-15 h-15" />}
-          maxTemp="77"
-          minTemp="61"
-        />
-        <DailyForecastCard
-          day="Mon"
-          icon={<img src={IconSunny} alt="Sunny" className="w-15 h-15" />}
-          maxTemp="75"
-          minTemp="59"
-        />
-      </div>{" "}
+      <DailyForecastList dailyData={weather.daily} />
       <HourlyForecastList />
     </div>
   );
