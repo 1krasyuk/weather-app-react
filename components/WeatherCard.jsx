@@ -1,6 +1,6 @@
 import { getWeatherIcon } from "../src/utils/getWeatherIcon";
-import bgTodaySmall from "../src/assets/images/bg-today-small.svg";
-import bgTodayLarge from "../src/assets/images/bg-today-large.svg";
+import { BgTodaySmall } from "./icons/BgTodaySmall";
+import { BgTodayLarge } from "./icons/BgTodayLarge";
 
 export default function WeatherCard({ currentData, city, country }) {
   if (!currentData) return null;
@@ -17,17 +17,8 @@ export default function WeatherCard({ currentData, city, country }) {
 
   return (
     <div className="relative h-72 rounded-2xl overflow-hidden mt-8 ">
-      <img
-        src={bgTodaySmall}
-        alt=""
-        className="absolute block desktop:hidden"
-      />
-
-      <img
-        src={bgTodayLarge}
-        alt=""
-        className="absolute hidden desktop:block"
-      />
+      <BgTodaySmall className="absolute block desktop:hidden" />
+      <BgTodayLarge className="absolute hidden desktop:block" />
 
       <div className="relative z-10 h-full m-auto flex flex-col items-center justify-center space-y-2.5 desktop:flex-row">
         <h2 className="text-3xl  font-semibold">
