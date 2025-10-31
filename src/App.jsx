@@ -69,7 +69,7 @@ function App() {
       <MetricsList currentData={weather.current} />
       <h2 className="text-xl mt-8 font-medium tracking-wide">Daily forecast</h2>
       <DailyForecastList dailyData={weather.daily} />
-      <HourlyForecastList />
+      <HourlyForecastList hourlyData={weather.hourly} />
     </div>
   );
 }
