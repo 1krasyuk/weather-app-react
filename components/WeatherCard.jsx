@@ -16,15 +16,17 @@ export default function WeatherCard({ currentData, city, country }) {
   });
 
   return (
-    <div className="relative h-72 rounded-2xl overflow-hidden mt-8 ">
+    <div className="relative h-72 mt-8 ">
       <BgTodaySmall className="absolute block desktop:hidden" />
       <BgTodayLarge className="absolute hidden desktop:block" />
 
-      <div className="relative z-10 h-full m-auto flex flex-col items-center justify-center space-y-2.5 desktop:flex-row">
-        <h2 className="text-3xl  font-semibold">
-          {city}, {country}
-        </h2>
-        <p className="text-lg text-neutral-200">{formatDate}</p>
+      <div className="relative z-10 h-full m-auto flex flex-col items-center justify-center desktop:px-5 desktop:justify-between space-y-2.5 desktop:flex-row">
+        <div>
+          <h2 className="text-3xl  font-semibold">
+            {city}, {country}
+          </h2>
+          <p className="text-lg text-neutral-200">{formatDate}</p>
+        </div>
         <div className="flex items-center space-x-6">
           <img src={icon} alt="Sunny weather" className="w-30 h-30" />
           <p className="text-8xl  font-semibold tracking-wide italic">

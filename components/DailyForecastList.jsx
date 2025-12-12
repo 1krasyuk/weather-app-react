@@ -5,7 +5,7 @@ export default function DailyForecastList({ dailyData }) {
   if (!dailyData) return null;
 
   return (
-    <div className="grid grid-cols-3 gap-4 my-5">
+    <div className="grid grid-cols-3 gap-4 my-5 desktop:grid-cols-7">
       {dailyData.time.map((day, i) => (
         <DailyForecastCard
           key={day}

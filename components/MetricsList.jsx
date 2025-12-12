@@ -25,7 +25,7 @@ export default function MetricsList({ currentData }) {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 my-5">
+    <div className="grid grid-cols-2 gap-4 my-5 desktop:grid-cols-4">
       {metricsCards.map((metricCard) => (
         <MetricsCard
           key={metricCard.title}

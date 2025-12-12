@@ -18,7 +18,6 @@ function App() {
   // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // if (!city) return;
     const fetchWeatherData = async () => {
       try {
         const geoResponse = await fetch(
@@ -55,21 +54,28 @@ function App() {
   }, []);
 
   return (
-    <div className="p-4 desktop:max-w-360 desktop:m-auto">
+    <div className="p-4 desktop:max-w-315 desktop:m-auto">
       <Header />
       <h1 className="text-neutral-0 text-center text-[55px] font-semibold  font-family-bricolage my-12 leading-16">
         How's the sky looking today?
       </h1>
       <SearchBar />
-      <WeatherCard
-        currentData={weather.current}
-        city={weather.city}
-        country={weather.country}
-      />
-      <MetricsList currentData={weather.current} />
-      <h2 className="text-xl mt-8 font-medium tracking-wide">Daily forecast</h2>
-      <DailyForecastList dailyData={weather.daily} />
-      <HourlyForecastList hourlyData={weather.hourly} />
+      <div className="desktop:grid desktop:items-start desktop:grid-cols-[2fr_1fr] desktop:gap-8 ">
+        <div>
+          <WeatherCard
+            currentData={weather.current}
+            city={weather.city}
+            country={weather.country}
+          />
+          <MetricsList currentData={weather.current} />
+          <h2 className="text-xl mt-8 font-medium tracking-wide">
+            Daily forecast
+          </h2>
+          <DailyForecastList dailyData={weather.daily} />
+        </div>
+
+        <HourlyForecastList hourlyData={weather.hourly} />
+      </div>
     </div>
   );
 }
