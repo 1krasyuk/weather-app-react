@@ -1,6 +1,10 @@
+import { useSearchParams } from "react-router";
 import { SearchIcon } from "./Icons/SearchIcon";
+import { useRef } from "react";
 
 export default function SearchBar() {
+  const [searchParams, setSearchParams] = useSearchParams("");
+  const inputRef = useRef();
   return (
     <div className="space-y-3 ">
       {/* desktop:flex desktop:w-200 desktop:gap-4 desktop:items-center desktop:mx-auto */}
@@ -16,9 +20,16 @@ export default function SearchBar() {
       placeholder:text-neutral-200
     "
           placeholder="Search for a place..."
+          ref={inputRef}
+          defaultValue={searchParams.get("city")}
         />
       </div>
-      <button className="bg-blue-500 w-full rounded-xl py-3.5 text-xl">
+      <button
+        className="bg-blue-500 w-full rounded-xl py-3.5 text-xl cursor-pointer"
+        onClick={() => {
+          setSearchParams({ city: inputRef.current.value });
+        }}
+      >
         Search
       </button>
     </div>

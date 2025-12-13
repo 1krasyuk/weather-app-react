@@ -1,6 +1,7 @@
 import "./App.css";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
@@ -16,12 +17,14 @@ import DailyForecastList from "../components/DailyForecastList";
 function App() {
   const [weather, setWeather] = useState({});
   // const [loading, setLoading] = useState(false);
+  const [searchParams, _] = useSearchParams("");
+  const searchCity = searchParams.get("city") || "Moscow";
 
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
         const geoResponse = await fetch(
-          `https://geocoding-api.open-meteo.com/v1/search?name=Moscow&count=10&language=en&format=json`
+          `https://geocoding-api.open-meteo.com/v1/search?name=${searchCity}&count=10&language=en&format=json`
         );
         if (!geoResponse.ok)
           throw new Error("Error while fetching Geocoding API");
@@ -51,7 +54,7 @@ function App() {
     };
 
     fetchWeatherData();
-  }, []);
+  }, [searchCity]);
 
   return (
     <div className="p-4 desktop:max-w-315 desktop:m-auto">
