@@ -4,8 +4,6 @@ import { DropdownIcon } from "./icons/DropdownIcon";
 import { CheckmarkIcon } from "./icons/CheckmarkIcon";
 import { useUnits } from "../src/hooks/useUnits";
 
-/* ===== OPTIONS ===== */
-
 const TEMP_OPTIONS = [
   { label: "Celsius (°C)", value: "c" },
   { label: "Fahrenheit (°F)", value: "f" },
@@ -56,6 +54,36 @@ export default function UnitsDropdown() {
   const handleSelect = (category, value) => {
     setUnits((prev) => ({ ...prev, [category]: value }));
   };
+
+  function Divider() {
+    return <div className="border-t border-neutral-700 my-1" />;
+  }
+
+  function DropdownSection({ title, options, active, onSelect }) {
+    return (
+      <div className="py-1">
+        <div className="px-4 py-1 text-xs uppercase tracking-wider text-neutral-400">
+          {title}
+        </div>
+
+        {options.map(({ label, value }) => {
+          const isActive = active === value;
+          return (
+            <button
+              key={value}
+              onClick={() => onSelect(value)}
+              className={`flex items-center justify-between w-full px-4 py-1.5 text-sm rounded hover:bg-neutral-700 ${
+                isActive ? "text-white font-medium" : "text-neutral-300"
+              }`}
+            >
+              <span>{label}</span>
+              {isActive && <CheckmarkIcon className="w-3.5 h-3.5" />}
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -109,36 +137,6 @@ export default function UnitsDropdown() {
           />
         </div>
       )}
-    </div>
-  );
-}
-
-function Divider() {
-  return <div className="border-t border-neutral-700 my-1" />;
-}
-
-function DropdownSection({ title, options, active, onSelect }) {
-  return (
-    <div className="py-1">
-      <div className="px-4 py-1 text-xs uppercase tracking-wider text-neutral-400">
-        {title}
-      </div>
-
-      {options.map(({ label, value }) => {
-        const isActive = active === value;
-        return (
-          <button
-            key={value}
-            onClick={() => onSelect(value)}
-            className={`flex items-center justify-between w-full px-4 py-1.5 text-sm rounded hover:bg-neutral-700 ${
-              isActive ? "text-white font-medium" : "text-neutral-300"
-            }`}
-          >
-            <span>{label}</span>
-            {isActive && <CheckmarkIcon className="w-3.5 h-3.5" />}
-          </button>
-        );
-      })}
     </div>
   );
 }
