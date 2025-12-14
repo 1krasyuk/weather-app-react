@@ -26,6 +26,22 @@ export default function UnitsDropdown() {
   const dropdownRef = useRef(null);
   const { units, setUnits } = useUnits();
 
+  const handleSwitchAll = (to) => {
+    if (to === "imperial") {
+      setUnits({
+        temperature: "f",
+        wind: "mph",
+        precipitation: "in",
+      });
+    } else {
+      setUnits({
+        temperature: "c",
+        wind: "kmh",
+        precipitation: "mm",
+      });
+    }
+  };
+
   useEffect(() => {
     function handleClickOutside(e) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -56,8 +72,13 @@ export default function UnitsDropdown() {
 
       {open && (
         <div className="absolute right-0 mt-2 w-56 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg z-10">
-          <button className="w-full text-left px-4 py-2 hover:bg-neutral-700 rounded-t-lg">
-            Switch to Imperial
+          <button
+            className="w-full text-left px-4 py-2 hover:bg-neutral-700 rounded-t-lg"
+            onClick={() =>
+              handleSwitchAll(units.temperature === "c" ? "imperial" : "metric")
+            }
+          >
+            Switch to {units.temperature === "c" ? "Imperial" : "Metric"}
           </button>
 
           <Divider />
