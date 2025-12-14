@@ -1,6 +1,11 @@
 import { getWeatherIcon } from "../src/utils/getWeatherIcon";
 
+import { convertTemperature } from "../src/utils/convertUnits";
+import { useUnits } from "../src/hooks/useUnits";
+
 export default function HourlyForecastCard({ icon, hour, temp }) {
+  const { units } = useUnits();
+
   const formatTime = (hour) => {
     return new Date(hour).toLocaleTimeString("en-US", {
       hour: "numeric",
@@ -14,7 +19,7 @@ export default function HourlyForecastCard({ icon, hour, temp }) {
         <img src={getWeatherIcon(icon)} className="w-10"></img>
         <p className="text-xl">{formatTime(hour)}</p>
       </div>
-      <p>{temp.toFixed(0)}°</p>
+      <p>{convertTemperature(temp, units.temperature)}°</p>
     </div>
   );
 }

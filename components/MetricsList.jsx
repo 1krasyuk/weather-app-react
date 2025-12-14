@@ -1,10 +1,21 @@
 import MetricsCard from "./MetricsCard";
+import { useUnits } from "../src/hooks/useUnits";
+import {
+  convertTemperature,
+  convertWind,
+  convertPrecipitation,
+} from "../src/utils/convertUnits";
 
 export default function MetricsList({ currentData }) {
+  const { units } = useUnits();
+
   const metricsCards = [
     {
       title: "Feels Like",
-      value: currentData?.temperature_2m.toFixed(0) ?? "-",
+      value:
+        currentData?.temperature_2m !== undefined
+          ? convertTemperature(currentData.temperature_2m, units.temperature)
+          : "-",
       unit: "°",
     },
     {
@@ -14,13 +25,19 @@ export default function MetricsList({ currentData }) {
     },
     {
       title: "Wind",
-      value: currentData?.wind_speed_10m.toFixed(0) ?? "-",
-      unit: "mph",
+      value:
+        currentData?.wind_speed_10m !== undefined
+          ? convertWind(currentData.wind_speed_10m, units.wind)
+          : "-",
+      unit: units.wind,
     },
     {
       title: "Precipitation",
-      value: currentData?.precipitation ?? "-",
-      unit: "in",
+      value:
+        currentData?.precipitation !== undefined
+          ? convertPrecipitation(currentData.precipitation, units.precipitation)
+          : "-",
+      unit: units.precipitation,
     },
   ];
 

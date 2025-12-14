@@ -1,8 +1,11 @@
 import { getWeatherIcon } from "../src/utils/getWeatherIcon";
 import { BgTodaySmall } from "./icons/BgTodaySmall";
 import { BgTodayLarge } from "./icons/BgTodayLarge";
+import { useUnits } from "../src/hooks/useUnits";
+import { convertTemperature } from "../src/utils/convertUnits";
 
 export default function WeatherCard({ currentData, city, country }) {
+  const { units } = useUnits();
   if (!currentData) return null;
 
   const { time: date, weather_code, temperature_2m: temp } = currentData;
@@ -30,7 +33,7 @@ export default function WeatherCard({ currentData, city, country }) {
         <div className="flex items-center space-x-6">
           <img src={icon} alt="Sunny weather" className="w-30 h-30" />
           <p className="text-8xl  font-semibold tracking-wide italic">
-            {temp.toFixed(0)}°
+            {convertTemperature(temp, units.temperature)}°
           </p>
         </div>
       </div>

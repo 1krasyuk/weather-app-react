@@ -40,7 +40,7 @@ export default function HourlyForecastList({ hourlyData }) {
         <div className="relative w-fit">
           <select
             className="w-34 bg-neutral-600 rounded-lg text-md px-3 py-1 appearance-none cursor-pointer"
-            value={selectedDay}
+            value={selectedDay || ""}
             onChange={(e) => setSelectedDay(e.target.value)}
           >
             {Object.keys(grouped).map((day) => (
