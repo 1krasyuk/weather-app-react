@@ -56,7 +56,7 @@ export default function HourlyForecastList({ hourlyData }) {
         </button> */}
       </div>
       <div
-        className="flex flex-col gap-4 max-h-145  overflow-y-auto "
+        className="flex flex-col gap-4 max-h-147 pt-2 overflow-y-auto "
         style={{
           scrollbarWidth: "thin",
           scrollbarColor: "#6B7280 transparent",
