@@ -18,7 +18,7 @@ function App() {
   const [weather, setWeather] = useState({});
   // const [loading, setLoading] = useState(false);
   const [searchParams, _] = useSearchParams("");
-  const searchCity = searchParams.get("city") || "Moscow";
+  const searchCity = searchParams.get("city") || "Berlin";
 
   useEffect(() => {
     const fetchWeatherData = async () => {
