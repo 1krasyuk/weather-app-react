@@ -20,7 +20,7 @@ export default function WeatherCard({ currentData, city, country }) {
 
   return (
     <div className="relative h-72 mt-8 ">
-      <BgTodaySmall className="absolute block desktop:hidden" />
+      <BgTodaySmall className="absolute blocl w-full desktop:hidden" />
       <BgTodayLarge className="absolute hidden desktop:block" />
 
       <div className="relative z-10 h-full m-auto flex flex-col items-center justify-center desktop:px-5 desktop:justify-between space-y-2.5 desktop:flex-row">
