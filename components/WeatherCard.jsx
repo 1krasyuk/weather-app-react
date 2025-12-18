@@ -25,10 +25,12 @@ export default function WeatherCard({ currentData, city, country }) {
 
       <div className="relative z-10 h-full m-auto flex flex-col items-center justify-center desktop:px-5 desktop:justify-between space-y-2.5 desktop:flex-row">
         <div>
-          <h2 className="text-3xl  font-semibold">
+          <h2 className="text-3xl text-center desktop:text-left font-semibold">
             {city}, {country}
           </h2>
-          <p className="text-lg text-neutral-200">{formatDate}</p>
+          <p className="text-lg text-neutral-200 text-center mt-2 desktop:text-left">
+            {formatDate}
+          </p>
         </div>
         <div className="flex items-center space-x-6">
           <img src={icon} alt="Sunny weather" className="w-30 h-30" />
